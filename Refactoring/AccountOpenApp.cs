@@ -20,7 +20,7 @@ namespace Refactoring
             //Load the contract party details...
             ContractPartyDTO contract = ContractPartyApp.ContractPartyGet(contractPartyId, LegalPartyLoadType.Full);
 
-            if (!IsInvalidContract(contractPartyId, contract))
+            if (!((contract == null) || (contract.LegalPartyId != contractPartyId)))
             {
                 PersonDTO person2 = null;
 
@@ -310,11 +310,6 @@ namespace Refactoring
             {
                 return response;
             }
-        }
-
-        private bool IsInvalidContract(int contractPartyId, ContractPartyDTO contract)
-        {
-            return (contract == null) || (contract.LegalPartyId != contractPartyId);
         }
 
         #region DummyMethodsOnlyHereToMakeItCompile
